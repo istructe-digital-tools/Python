@@ -1,0 +1,3 @@
+include EC0/definitions.csv
+recursive-include EC0 *.py
+recursive-include Settings *.py
