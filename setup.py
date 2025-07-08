@@ -8,9 +8,9 @@ setup(
     description="A Python project for engineering calculations and design equations.",
     packages=find_packages(),
     include_package_data=True,
-	package_data={
-	    "EC0": ["definitions.csv"],
-	},
+    package_data={
+        "EC0": ["definitions.csv"],
+    },
     install_requires=[],
     license="Fair Source License",
     classifiers=[
