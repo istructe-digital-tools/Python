@@ -12,12 +12,7 @@ class DesignEquation(object):
 		
 	def __format__(self, format_spec):
         if format_spec == "short":
-            return self._parameters()
-        if format_spec == "ref":
-            return self._reference()
-		if format_spec == "full":
-			return self._reference() + self._parameters()	
-        return self._reference() + self._parameters()
+            return self.parameters()
 
 	def _getEquationParameters(self):
 		#Returns a list of explicitly defined objects that are of type DesignFactor or DesignValue.
@@ -29,10 +24,9 @@ class DesignEquation(object):
 		    if key not in exclude and isinstance(getattr(self, key), (DesignFactor,
 		                                                              DesignValue))
 		]
-
 		return parameters
 
-	def _reference(self, equation) -> str:
+	def reference(self, equation) -> str:
 		output = self.standard + ":\n  "
 		output += "Section: " + self.section + "\n  "
 		output += "Subsection: " + self.subsection + "\n  "
@@ -44,10 +38,11 @@ class DesignEquation(object):
 		for parameter in parameters:
 			output += "    " + parameter.abbreviation + ", " + parameter.description + "\n"
 		output += "  "
+		output += self.parameters()
 		return output
 		
-    def _parameters(self, equation) -> str:
-		output = "Solved:\n"
+    def parameters(self) -> str:
+		output = "Parameters:\n"
 		output += "    " + equation + "\n"
 		for parameter in parameters:
 			if isinstance(parameter, DesignEquation):
@@ -55,5 +50,4 @@ class DesignEquation(object):
 			else:
 				output += "    " + str(parameter)
 			output += "\n"
-
-		return output + "\n  "
+		return output
