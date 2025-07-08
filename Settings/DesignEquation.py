@@ -43,7 +43,7 @@ class DesignEquation(object):
 		
 	def parameters(self) -> str:
 		output = "Parameters:\n"
-
+		parameters = self._getEquationParameters()
 		for parameter in parameters:
 			if isinstance(parameter, DesignEquation):
 				output += "	" + f"{parameter:value}"
