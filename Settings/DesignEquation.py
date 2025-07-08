@@ -9,28 +9,15 @@ class DesignEquation(object):
 	clause: str
 	equation: str
 
-	def reference(self, equation) -> str:
-		output = self.standard + ":\n  "
-		output += "Section: " + self.section + "\n  "
-		output += "Subsection: " + self.subsection + "\n  "
-		output += "Clause: " + self.clause + "\n  "
-		output += "Equation: " + self.equation + "\n  "
-		output += "Where:\n"
-
-		parameters = self._getEquationParameters()
-		for parameter in parameters:
-			output += "    " + parameter.abbreviation + ", " + parameter.description + "\n"
-		output += "  "
-		output += "Solved:\n"
-		output += "    " + equation + "\n"
-		for parameter in parameters:
-			if isinstance(parameter, DesignEquation):
-				output += "    " + f"{parameter:value}"
-			else:
-				output += "    " + str(parameter)
-			output += "\n"
-
-		return output + "\n  "
+		
+	def __format__(self, format_spec):
+        if format_spec == "short":
+            return self._parameters()
+        if format_spec == "ref":
+            return self._reference()
+		if format_spec == "full":
+			return self._reference() + self._parameters()	
+        return self._reference() + self._parameters()
 
 	def _getEquationParameters(self):
 		#Returns a list of explicitly defined objects that are of type DesignFactor or DesignValue.
@@ -44,3 +31,29 @@ class DesignEquation(object):
 		]
 
 		return parameters
+
+	def _reference(self, equation) -> str:
+		output = self.standard + ":\n  "
+		output += "Section: " + self.section + "\n  "
+		output += "Subsection: " + self.subsection + "\n  "
+		output += "Clause: " + self.clause + "\n  "
+		output += "Equation: " + self.equation + "\n  "
+		output += "Where:\n"
+
+		parameters = self._getEquationParameters()
+		for parameter in parameters:
+			output += "    " + parameter.abbreviation + ", " + parameter.description + "\n"
+		output += "  "
+		return output
+		
+    def _parameters(self, equation) -> str:
+		output = "Solved:\n"
+		output += "    " + equation + "\n"
+		for parameter in parameters:
+			if isinstance(parameter, DesignEquation):
+				output += "    " + f"{parameter:value}"
+			else:
+				output += "    " + str(parameter)
+			output += "\n"
+
+		return output + "\n  "
