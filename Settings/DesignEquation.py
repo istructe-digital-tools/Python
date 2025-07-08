@@ -11,8 +11,8 @@ class DesignEquation(object):
 
 		
 	def __format__(self, format_spec):
-        if format_spec == "short":
-            return self.parameters()
+		if format_spec == "short":
+			return self.parameters()
 
 	def _getEquationParameters(self):
 		#Returns a list of explicitly defined objects that are of type DesignFactor or DesignValue.
@@ -20,9 +20,9 @@ class DesignEquation(object):
 
 		# Get all instance attributes excluding defaults and retrieve their values
 		parameters = [
-		    getattr(self, key) for key in vars(self).keys()
-		    if key not in exclude and isinstance(getattr(self, key), (DesignFactor,
-		                                                              DesignValue))
+			getattr(self, key) for key in vars(self).keys()
+			if key not in exclude and isinstance(getattr(self, key), (DesignFactor,
+																	  DesignValue))
 		]
 		return parameters
 
@@ -36,18 +36,18 @@ class DesignEquation(object):
 
 		parameters = self._getEquationParameters()
 		for parameter in parameters:
-			output += "    " + parameter.abbreviation + ", " + parameter.description + "\n"
+			output += "	" + parameter.abbreviation + ", " + parameter.description + "\n"
 		output += "  "
 		output += self.parameters()
 		return output
 		
-    def parameters(self) -> str:
+	def parameters(self) -> str:
 		output = "Parameters:\n"
-		output += "    " + equation + "\n"
+		output += "	" + equation + "\n"
 		for parameter in parameters:
 			if isinstance(parameter, DesignEquation):
-				output += "    " + f"{parameter:value}"
+				output += "	" + f"{parameter:value}"
 			else:
-				output += "    " + str(parameter)
+				output += "	" + str(parameter)
 			output += "\n"
 		return output
