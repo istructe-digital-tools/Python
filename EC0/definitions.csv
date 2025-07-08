@@ -1,0 +1,7 @@
+Q_{comb}, Combination value of a variable action.,
+Q_{d}, Design value of a variable action.,
+Q_{k}, Characteristic value of a variable action.,
+Q_{rep}, Representative value of a variable action.,
+
+gamma_{Q}, Partial factor for variable actions, accounting for the uncertainties covered by gamma_{F}.,
+psi_{0}, Combination factor applied to a variable action to determine its combination value.,
