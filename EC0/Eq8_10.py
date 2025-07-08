@@ -34,27 +34,27 @@ class Eq8_10(DesignEquation):
 		#Principle 2: Validate Inputs Early
 		if not isinstance(gamma_Q, DesignFactor):
 			raise TypeError(
-			    f"Argument 'gamma_Q' must be of type DesignFactor, not {type(gamma_Q).__name__}."
+				f"Argument 'gamma_Q' must be of type DesignFactor, not {type(gamma_Q).__name__}."
 			)
 		#Principle 3: Use Meaningful Errors and Exceptions
 		if gamma_Q.abbreviation != "gamma_{Q}":
 			raise ValueError(
-			    f"Argument 'gamma_Q' must have abbreviation 'gamma_{{Q}}'; got '{gamma_Q.abbreviation}'."
+				f"Argument 'gamma_Q' must have abbreviation 'gamma_{{Q}}'; got '{gamma_Q.abbreviation}'."
 			)
 		if not isinstance(Q_comb, DesignValue):
 			raise TypeError(
-			    f"Argument 'Q_comb' must be of type DesignValue, not {type(Q_comb).__name__}."
+				f"Argument 'Q_comb' must be of type DesignValue, not {type(Q_comb).__name__}."
 			)
 
 		valid_prefixes = ("Q_{rep}", "Q_{k}", "Q_{comb}", "Q_{freq}", "Q_{qper}")
 		if not Q_comb.abbreviation.startswith(valid_prefixes):
 			raise ValueError(
-			    f"Argument 'Q_comb' must start with one of {valid_prefixes}; got '{Q_comb.abbreviation}'."
+				f"Argument 'Q_comb' must start with one of {valid_prefixes}; got '{Q_comb.abbreviation}'."
 			)
 
 		#Principle 4: Log Key Steps for Traceability
 		logger.debug(
-		    f"Eq8_10 input: gamma_Q=%s, Q_comb=%s {gamma_Q:value}, {Q_comb:value}")
+			f"Eq8_10 input: gamma_Q=%s, Q_comb=%s {gamma_Q:value}, {Q_comb:value}")
 
 		#Principle 5: Enforce Unit Consistency
 		#No unit conversion required
@@ -81,17 +81,19 @@ class Eq8_10(DesignEquation):
 		if hasattr(self.Q_d, name):
 			return getattr(self.Q_d, name)
 		raise AttributeError(
-		    f"{self.__class__.__name__} has no attribute '{name}'.")
+			f"{self.__class__.__name__} has no attribute '{name}'.")
 
 	def __format__(self, format_spec):
 		if format_spec == "value":
 			return str(self.Q_d)
+		if format_spec == "short":
+			return self.parameters()
 		return str(self)
 
 	#Principle 9: Provide a clear output interface
 	def __str__(self):
 		output = "Q_{d} = gamma_{Q} * Q_{rep} \n  "
-		output += "As per clause 6.1.2.3(1): \n    "
+		output += "As per clause 6.1.2.3(1): \n	"
 		output += "Q_{d} = gamma_{Q} * " + self.Q_comb.abbreviation
 
 		output = self.reference(output)

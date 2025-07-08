@@ -143,6 +143,8 @@ class Eq6_1(DesignEquation):
     def __format__(self, format_spec):
         if format_spec == "value":
             return str(self.Q_comb)
+		if format_spec == "short":
+			return self.parameters()
         return str(self)
 
     # Printable string output
