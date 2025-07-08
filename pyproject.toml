@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DesignCodes"
+version = "0.1.0"
+description = "A Python project for engineering calculations and design equations."
+authors = [
+    { name="Your Name", email="your.email@example.com" }
+]
+license = { text = "Fair Source License" }
+requires-python = ">=3.6"
+
+[tool.setuptools.packages.find]
+where = ["."]
