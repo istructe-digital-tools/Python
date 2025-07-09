@@ -1,3 +1,5 @@
 include EC0/definitions.csv
+include Settings/forceUnits.csv
+include Settings/lengthUnits.csv
 recursive-include EC0 *.py
 recursive-include Settings *.py

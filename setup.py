@@ -10,6 +10,8 @@ setup(
     include_package_data=True,
     package_data={
         "EC0": ["definitions.csv"],
+		"Settings": ["forceUnits.csv"],
+		"Settings": ["lengthUnits.csv"],
     },
     install_requires=[],
     license="Fair Source License",
