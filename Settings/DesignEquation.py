@@ -33,15 +33,19 @@ class DesignEquation(object):
 		output += "Clause: " + self.clause + "\n  "
 		output += "Equation: " + self.equation + "\n  "
 		output += "Where:\n"
-
+		output += "  " + self.formula + "\n  "
 		parameters = self._getEquationParameters()
 		for parameter in parameters:
-			output += "	" + parameter.abbreviation + ", " + parameter.description + "\n"
-		output += "  "
-		output += self.parameters()
+			output += "	" + parameter.abbreviation + ", " + parameter.description + "\n  "
+		output += self._params()
 		return output
 		
 	def parameters(self) -> str:
+			output = "  " + self.formula + "\t" + self.equation + "\n  "
+			output += self._params()
+			return output
+		
+	def _params(self) -> str:
 		output = "Parameters:\n"
 		parameters = self._getEquationParameters()
 		for parameter in parameters:

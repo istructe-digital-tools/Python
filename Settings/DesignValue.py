@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from Settings.UnitConversion import UnitConversion
 
 class DesignValueMeta(type):
 
@@ -43,3 +43,6 @@ class DesignValue(metaclass=DesignValueMeta):
 
 	def __format__(self, format_spec):
 		return str(self)
+
+	def Units(self, units: str):
+		return UnitConversion(self, units)
